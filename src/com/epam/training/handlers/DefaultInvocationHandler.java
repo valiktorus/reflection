@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
  * @param <T> the type parameter
  */
 public class DefaultInvocationHandler<T> implements InvocationHandler {
+    private static final String METHOD_WAS_INVOKED_FROM_PROXY = "method %s was invoked from proxy\n";
     private T target;
 
     /**
@@ -22,7 +23,7 @@ public class DefaultInvocationHandler<T> implements InvocationHandler {
 
     @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
-        System.out.printf("method %s invoked from proxy\n", method.getName());
+        System.out.printf(METHOD_WAS_INVOKED_FROM_PROXY, method.getName());
         return method.invoke(target, args);
     }
 }

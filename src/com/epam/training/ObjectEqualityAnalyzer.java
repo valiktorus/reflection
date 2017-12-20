@@ -34,7 +34,7 @@ public final class ObjectEqualityAnalyzer {
                     .filter(field -> field.getAnnotation(Equals.class) != null)
                     .allMatch(field -> {
                         Equals equalsAnnotation = field.getDeclaredAnnotation(Equals.class);
-                        CompareEnum compareby = equalsAnnotation.compareby();
+                        CompareEnum compareBy = equalsAnnotation.compareby();
                         field.setAccessible(true);
                         Object firstField = null;
                         Object secondField = null;
@@ -47,7 +47,7 @@ public final class ObjectEqualityAnalyzer {
                         } finally {
                             field.setAccessible(false);
                         }
-                        return compareFieldValue(firstField, secondField, compareby);
+                        return compareFieldValue(firstField, secondField, compareBy);
                     });
         } else {
             return false;
