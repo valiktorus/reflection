@@ -10,9 +10,13 @@ import java.lang.annotation.Target;
 /**
  * Created by Valiantsin Pshanichnik on 19.12.2017.
  */
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = ElementType.FIELD)
 public @interface Equals {
+    /**
+     * Compareby defines way of comparing fields.
+     *
+     * @return the compare enum
+     */
     CompareEnum compareby();
 }

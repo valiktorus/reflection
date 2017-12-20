@@ -8,42 +8,57 @@ import java.util.Arrays;
 /**
  * Created by Valiantsin Pshanichnik on 20.12.2017.
  */
-public class ObjectEqualityAnalyzer {
-    public static <T> boolean equalObjects(T firstObject, T secondObject ){
+public final class ObjectEqualityAnalyzer {
+    private ObjectEqualityAnalyzer() {
+    }
+
+    /**
+     * equalObjects compares two objects.
+     *
+     * @param <T>          the type parameter
+     * @param firstObject  the first object
+     * @param secondObject the second object
+     * @return the boolean true if objects are equals
+     */
+    public static <T> boolean equalObjects(final T firstObject, final T secondObject) {
         return compareClassFields(firstObject.getClass(), secondObject.getClass(), firstObject, secondObject);
     }
 
-    private static <T> boolean compareClassFields(Class<?> firstClass, Class<?> secondClass, T first, T second) {
+    private static <T> boolean compareClassFields(final Class<?> firstClass, final Class<?> secondClass,
+                                                  final T firstObject, final T secondObject) {
         if (firstClass == null) {
             return true;
         }
-        if (compareClassFields(firstClass.getSuperclass(), secondClass.getSuperclass(), first, second)) {
+        if (compareClassFields(firstClass.getSuperclass(), secondClass.getSuperclass(), firstObject, secondObject)) {
             return Arrays.stream(firstClass.getDeclaredFields())
                     .filter(field -> field.getAnnotation(Equals.class) != null)
                     .allMatch(field -> {
                         Equals equalsAnnotation = field.getDeclaredAnnotation(Equals.class);
                         CompareEnum compareby = equalsAnnotation.compareby();
                         field.setAccessible(true);
+                        Object firstField = null;
+                        Object secondField = null;
                         try {
-                            Object firstField = field.get(first);
-                            Object secondField = field.get(second);
-                            if (CompareEnum.REFERENCE == compareby) {
-                                if (firstField != secondField) {
-                                    return false;
-                                }
-                            } else if (CompareEnum.VALUE == compareby) {
-                                if (!firstField.equals(secondField)) {
-                                    return false;
-                                }
-                            }
+                            field.setAccessible(true);
+                            firstField = field.get(firstObject);
+                            secondField = field.get(secondObject);
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
+                        } finally {
+                            field.setAccessible(false);
                         }
-                        return true;
+                        return compareFieldValue(firstField, secondField, compareby);
                     });
-        }else {
+        } else {
             return false;
         }
     }
 
+    private static <T> boolean compareFieldValue(final T firstField, final T secondField,
+                                                 final CompareEnum compareEnum) {
+        if (CompareEnum.REFERENCE == compareEnum && firstField != secondField) {
+            return false;
+        }
+        return !(CompareEnum.VALUE == compareEnum && !firstField.equals(secondField));
+    }
 }

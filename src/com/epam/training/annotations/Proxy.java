@@ -9,9 +9,13 @@ import java.lang.reflect.InvocationHandler;
 /**
  * Created by Valiantsin Pshanichnik on 19.12.2017.
  */
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = ElementType.TYPE)
 public @interface Proxy {
+    /**
+     * Invocation handler class.
+     *
+     * @return the class of InvocationHandler impementation
+     */
     Class<? extends InvocationHandler> invocationHandler();
 }
