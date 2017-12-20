@@ -56,7 +56,7 @@ public final class ObjectEqualityAnalyzer {
 
     private static <T> boolean compareFieldValue(final T firstField, final T secondField,
                                                  final CompareEnum compareEnum) {
-        switch (compareEnum){
+        switch (compareEnum) {
             case REFERENCE:
                 return firstField == secondField;
             case VALUE:

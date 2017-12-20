@@ -1,5 +1,7 @@
 package com.epam.training.annotations;
 
+import com.epam.training.handlers.DefaultInvocationHandler;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,5 +19,5 @@ public @interface Proxy {
      *
      * @return the class of InvocationHandler impementation
      */
-    Class<? extends InvocationHandler> invocationHandler();
+    Class<? extends InvocationHandler> invocationHandler() default DefaultInvocationHandler.class;
 }
