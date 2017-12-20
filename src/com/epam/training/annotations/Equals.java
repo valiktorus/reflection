@@ -1,5 +1,7 @@
 package com.epam.training.annotations;
 
+import com.epam.training.enums.CompareEnum;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,5 +14,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = ElementType.FIELD)
 public @interface Equals {
-    String compareby();
+    CompareEnum compareby();
 }

@@ -1,6 +1,7 @@
 package com.epam.training;
 
 import com.epam.training.annotations.Equals;
+import com.epam.training.enums.CompareEnum;
 
 import java.util.Arrays;
 
@@ -21,16 +22,16 @@ public class ObjectEqualityAnalyzer {
                     .filter(field -> field.getAnnotation(Equals.class) != null)
                     .allMatch(field -> {
                         Equals equalsAnnotation = field.getDeclaredAnnotation(Equals.class);
-                        String compareby = equalsAnnotation.compareby();
+                        CompareEnum compareby = equalsAnnotation.compareby();
                         field.setAccessible(true);
                         try {
                             Object firstField = field.get(first);
                             Object secondField = field.get(second);
-                            if ("reference".equals(compareby)) {
+                            if (CompareEnum.REFERENCE == compareby) {
                                 if (firstField != secondField) {
                                     return false;
                                 }
-                            } else if ("value".equals(compareby)) {
+                            } else if (CompareEnum.VALUE == compareby) {
                                 if (!firstField.equals(secondField)) {
                                     return false;
                                 }
