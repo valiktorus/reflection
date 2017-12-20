@@ -56,9 +56,13 @@ public final class ObjectEqualityAnalyzer {
 
     private static <T> boolean compareFieldValue(final T firstField, final T secondField,
                                                  final CompareEnum compareEnum) {
-        if (CompareEnum.REFERENCE == compareEnum && firstField != secondField) {
-            return false;
+        switch (compareEnum){
+            case REFERENCE:
+                return firstField == secondField;
+            case VALUE:
+                return firstField.equals(secondField);
+            default:
+                return false;
         }
-        return !(CompareEnum.VALUE == compareEnum && !firstField.equals(secondField));
     }
 }
