@@ -17,7 +17,7 @@ public @interface Proxy {
     /**
      * Invocation handler class.
      *
-     * @return the class of InvocationHandler impementation
+     * @return the class of InvocationHandler implementation
      */
     Class<? extends InvocationHandler> invocationHandler() default DefaultInvocationHandler.class;
 }

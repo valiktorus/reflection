@@ -7,9 +7,9 @@ import com.epam.training.enums.CompareEnum;
  * Created by Valiantsin Pshanichnik on 20.12.2017.
  */
 public class SuperEqual {
-    @Equals(compareby = CompareEnum.VALUE)
+    @Equals(compareBy = CompareEnum.VALUE)
     private int weight;
-    @Equals(compareby = CompareEnum.VALUE)
+    @Equals(compareBy = CompareEnum.VALUE)
     public String lastName;
 
     public SuperEqual(int weight, String lastName) {

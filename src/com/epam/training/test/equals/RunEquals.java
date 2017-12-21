@@ -11,7 +11,7 @@ public class RunEquals {
 
         Equal equal1 = new Equal(80, "Snow", "Jhon", 31,185.6);
         Equal equal2 = new Equal(80, "Snow", "Jhon", 30, 185.6);
-//        System.out.println(ObjectEqualityAnalyzer.equalObjects(equal, equal1));
+        System.out.println(ObjectEqualityAnalyzer.equalObjects(equal, equal1));
         System.out.println(ObjectEqualityAnalyzer.equalObjects(equal, equal2));
     }
 }

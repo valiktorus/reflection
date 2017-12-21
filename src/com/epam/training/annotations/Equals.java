@@ -18,5 +18,5 @@ public @interface Equals {
      *
      * @return the compare enum
      */
-    CompareEnum compareby() default CompareEnum.VALUE;
+    CompareEnum compareBy() default CompareEnum.VALUE;
 }

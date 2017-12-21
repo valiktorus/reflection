@@ -3,7 +3,7 @@ package com.epam.training.exception;
 /**
  * Created by Valiantsin Pshanichnik on 20.12.2017.
  */
-public class CompareObjectsException extends Exception {
+public class CompareObjectsException extends RuntimeException {
     /**
      * Instantiates a new Compare objects exception.
      */
